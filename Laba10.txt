@@ -1,0 +1,33 @@
+masel@masel-VirtualBox /h/masel# sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет apt-transport-https самой новой версии (2.7.14build2).
+Уже установлен пакет ca-certificates самой новой версии (20240203).
+Уже установлен пакет curl самой новой версии (8.5.0-2ubuntu10.5).
+Уже установлен пакет software-properties-common самой новой версии (0.99.49.1).
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 50 пакетов не обновлено.
+masel@masel-VirtualBox /h/masel# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+Файл '/usr/share/keyrings/docker-archive-keyring.gpg' существует. Записать поверх? (y/N) y
+masel@masel-VirtualBox /h/masel# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+masel@masel-VirtualBox /h/masel# sudo apt install -y docker-ce docker-ce-cli containerd.io
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет docker-ce самой новой версии (5:27.4.0-1~ubuntu.24.04~noble).
+Уже установлен пакет docker-ce-cli самой новой версии (5:27.4.0-1~ubuntu.24.04~noble).
+Уже установлен пакет containerd.io самой новой версии (1.7.24-1).
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 50 пакетов не обновлено.
+masel@masel-VirtualBox /h/masel# docker --version
+Docker version 27.4.0, build bde2b89
+masel@masel-VirtualBox /h/masel# docker pull ubuntu:latest
+latest: Pulling from library/ubuntu
+Digest: sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab
+Status: Image is up to date for ubuntu:latest
+docker.io/library/ubuntu:latest
+masel@masel-VirtualBox /h/masel [125]# docker run -it  ubuntu:latest
+root@68b06bbd172a:/# ⏎                                                          
+masel@masel-VirtualBox /h/masel# docker ps
+CONTAINER ID   IMAGE           COMMAND       CREATED          STATUS          PORTS     NAMES
+68b06bbd172a   ubuntu:latest   "/bin/bash"   12 seconds ago   Up 12 seconds             festive_moser
+masel@masel-VirtualBox /h/masel#

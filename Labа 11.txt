@@ -1,0 +1,43 @@
+masel@masel-VirtualBox /h/masel# nano chardev_message_queue.c
+masel@masel-VirtualBox /h/masel# make
+make -C /lib/modules/6.8.0-50-generic/build M=/home/masel modules
+make[1]: вход в каталог «/usr/src/linux-headers-6.8.0-50-generic»
+warning: the compiler differs from the one used to build the kernel
+  The kernel was built by: x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+  You are using:           gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+  CC [M]  /home/masel/chardev_message_queue.o
+  MODPOST /home/masel/Module.symvers
+  CC [M]  /home/masel/chardev_message_queue.mod.o
+  LD [M]  /home/masel/chardev_message_queue.ko
+  BTF [M] /home/masel/chardev_message_queue.ko
+Skipping BTF generation for /home/masel/chardev_message_queue.ko due to unavailability of vmlinux
+make[1]: выход из каталога «/usr/src/linux-headers-6.8.0-50-generic»
+masel@masel-VirtualBox /h/masel# insmod chardev_counter.ko
+insmod: ERROR: could not load module chardev_counter.ko: No such file or directory
+masel@masel-VirtualBox /h/masel [1]# ls
+ chardev_message_queue.c       chardev_message_queue.o   OS/          Изображения/
+ chardev_message_queue.ko      Makefile                  snap/        Музыка/
+ chardev_message_queue.mod     modules.order             Видео/       Общедоступные/
+ chardev_message_queue.mod.c   Module.symvers            Документы/  'Рабочий стол'/
+ chardev_message_queue.mod.o   nginx-php/                Загрузки/    Шаблоны/
+masel@masel-VirtualBox /h/masel# insmod chardev_message_queue.ko 
+masel@masel-VirtualBox /h/masel# dmesg | tail
+[ 1653.375964 111834] msgqueue: Read message: Queue is empty
+[ 1653.375967] msgqueue: Read message: Queue is empty
+[ 1653.375970] msgqueue: Read message: Queue is empty
+[ 1653.375973] msgqueue: Read message: Queue is empty
+[ 1653.375976] msgqueue: Read message: Queue is empty
+[ 1653.375980] msgqueue: Read message: Queue is empty
+[ 1653.375984] msgqueue: Read message: Queue is empty
+[ 1653.385176] msgqueue: Device closed
+[ 1753.831497] msgqueue: Unregistered device
+[ 2011.954714] msgqueue: Registered with major number 236
+masel@masel-VirtualBox /h/masel# sudo mknod /dev/msgqueue c 236  0
+masel@masel-VirtualBox /h/masel# sudo chmod 666 /dev/msgqueue
+masel@masel-VirtualBox /h/masel# echo "Happy New Year!" > /dev/msgqueue
+masel@masel-VirtualBox /h/masel# 
+                                cat /dev/msgqueue
+Happy New Year!
+masel@masel-VirtualBox /h/masel# cat /dev/msgqueue
+Queue is empty
+masel@masel-VirtualBox /h/masel#
